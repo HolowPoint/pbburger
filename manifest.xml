@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+           xsi:type="MailApp">
+  <Id>6f1b6571-89a3-4d09-9c53-0f7c13d5f2d3</Id>
+  <Version>0.1.0.0</Version>
+  <ProviderName>Team #18 - UConn</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="UConn Email Safety" />
+  <Description DefaultValue="Flags suspicious emails based on backend verdict." />
+  <IconUrl DefaultValue="https://localhost:3000/icons/uconn-48.svg" />
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/icons/uconn-48.svg" />
+  <SupportUrl DefaultValue="https://uconn.edu" />
+  <AppDomains>
+    <AppDomain>https://localhost:3000</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Mailbox" />
+  </Hosts>
+  <Requirements>
+    <Sets DefaultMinVersion="1.8">
+      <Set Name="Mailbox" />
+    </Sets>
+  </Requirements>
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://localhost:3000/taskpane" />
+        <RequestedHeight>350</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadItem</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+  </Rule>
+
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <VersionOverrides xsi:type="mailappor:VersionOverrides" Version="1.0">
+    <mailappor:Hosts>
+      <mailappor:Host xsi:type="mailappor:Mailbox">
+        <mailappor:DesktopFormFactor>
+          <mailappor:FunctionFile resid="Commands.Url" />
+          <mailappor:ExtensionPoint xsi:type="mailappor:MessageReadCommandSurface">
+            <mailappor:OfficeTab id="TabDefault">
+              <mailappor:Group id="UConn.Group" label="UConn Safety">
+                <mailappor:Control xsi:type="mailappor:Button" id="UConn.ShowPane">
+                  <mailappor:Label resid="UConn.RunCheck.Label" />
+                  <mailappor:Supertip>
+                    <mailappor:Title resid="UConn.RunCheck.Label" />
+                    <mailappor:Description resid="UConn.RunCheck.Desc" />
+                  </mailappor:Supertip>
+                  <mailappor:Icon>
+                    <mailappor:bt:Image size="16" resid="Icon.16" />
+                    <mailappor:bt:Image size="32" resid="Icon.32" />
+                    <mailappor:bt:Image size="80" resid="Icon.80" />
+                  </mailappor:Icon>
+                  <mailappor:Action xsi:type="mailappor:ShowTaskpane">
+                    <mailappor:SourceLocation resid="TaskPane.Url" />
+                  </mailappor:Action>
+                </mailappor:Control>
+              </mailappor:Group>
+            </mailappor:OfficeTab>
+          </mailappor:ExtensionPoint>
+        </mailappor:DesktopFormFactor>
+      </mailappor:Host>
+    </mailappor:Hosts>
+    <mailappor:Resources>
+      <mailappor:bt:Images>
+        <mailappor:bt:Image id="Icon.16" DefaultValue="https://localhost:3000/icons/uconn-48.svg" />
+        <mailappor:bt:Image id="Icon.32" DefaultValue="https://localhost:3000/icons/uconn-48.svg" />
+        <mailappor:bt:Image id="Icon.80" DefaultValue="https://localhost:3000/icons/uconn-48.svg" />
+      </mailappor:bt:Images>
+      <mailappor:bt:Urls>
+        <mailappor:bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands" />
+        <mailappor:bt:Url id="TaskPane.Url" DefaultValue="https://localhost:3000/taskpane" />
+      </mailappor:bt:Urls>
+      <mailappor:bt:ShortStrings>
+        <mailappor:bt:String id="UConn.RunCheck.Label" DefaultValue="Run Safety Check" />
+      </mailappor:bt:ShortStrings>
+      <mailappor:bt:LongStrings>
+        <mailappor:bt:String id="UConn.RunCheck.Desc" DefaultValue="Show a notification and open task pane to check email safety." />
+      </mailappor:bt:LongStrings>
+    </mailappor:Resources>
+  </VersionOverrides>
+</OfficeApp>
+
+
