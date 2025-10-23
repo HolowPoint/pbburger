@@ -1,3 +1,5 @@
+# pbburger
+
 UConn Email Safety - Outlook Add-in (Frontend)
 
 Local development:
@@ -17,4 +19,3 @@ Configuration:
 Notes:
 - Uses Office.js Mailbox 1.8 APIs
 - Vite builds two HTML entries: taskpane and commands
-
