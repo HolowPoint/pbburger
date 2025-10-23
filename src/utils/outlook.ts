@@ -6,6 +6,7 @@ export type MessageMetadata = {
   from?: string;
   to?: string[];
   cc?: string[];
+  body?: string;
 };
 
 export async function getSelectedMessageMetadata(): Promise<MessageMetadata> {
@@ -35,7 +36,17 @@ export async function getSelectedMessageMetadata(): Promise<MessageMetadata> {
       if (cc && cc.length) {
         meta.cc = cc.map((r) => formatEmailAddress(r.emailAddress, r.displayName));
       }
-      resolve(meta);
+      // Body (async)
+      if (item.body) {
+        item.body.getAsync(Office.CoercionType.Text, (result) => {
+          if (result.status === Office.AsyncResultStatus.Succeeded) {
+            meta.body = result.value;
+          }
+          resolve(meta);
+        });
+      } else {
+        resolve(meta);
+      }
     } catch (e) {
       reject(e);
     }
